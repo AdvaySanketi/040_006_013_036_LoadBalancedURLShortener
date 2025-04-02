@@ -1,0 +1,21 @@
+services:
+  redis:
+    image: redis:latest
+    restart: always
+    environment:
+      - REDIS_PASSWORD=password
+    command: ["redis-server", "--requirepass", "password"]
+    ports:
+      - "6379:6379"
+
+  app:
+    build: .
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=password
+      - BASE_URL=http://localhost:5000
+    ports:
+      - "5000:5000"
