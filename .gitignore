@@ -3,3 +3,5 @@ node_modules/
 
 k8s/
 kind-config.yaml
+
+url-shortener-load-test/results/

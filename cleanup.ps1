@@ -1,5 +1,8 @@
 Write-Host "Starting comprehensive Kubernetes resource cleanup..." -ForegroundColor Green
 
+Write-Host "Deleting HorizontalPodAutoscaler..." -ForegroundColor Yellow
+kubectl delete horizontalpodautoscaler urlshortener --ignore-not-found
+
 Write-Host "Deleting Deployments..." -ForegroundColor Yellow
 kubectl delete deployment redis --ignore-not-found
 kubectl delete deployment urlshortener --ignore-not-found

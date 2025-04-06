@@ -139,3 +139,23 @@ spec:
   ports:
     - port: 80
       targetPort: 5000
+---
+# HorizontalPodAutoscaler for the URL Shortener
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: urlshortener
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: urlshortener
+  minReplicas: 2
+  maxReplicas: 5
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
